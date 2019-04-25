@@ -1,20 +1,45 @@
+// @flow
 import { Game } from 'boardgame.io/core';
-import { isDraw, isVictory } from './helpers';
+import { isDraw, isVictory } from '../helpers';
+
+type GameResult = {
+  status: 'WIN' | 'DRAW',
+  position?: Array<number>,
+  winner?: string,
+  draw?: boolean,
+};
+type MiniBoard = {
+  id: number,
+  cells: Array<string | null>,
+  winner: null | string,
+};
+
+const createMiniBoard = (_, index): MiniBoard => ({
+  id: index,
+  cells: new Array(9).fill(null),
+  winner: null,
+});
+const createInitialMiniBoards = () => new Array(9).fill(null).map(createMiniBoard);
+const createInitialActiveMiniBoardIds = () => new Array(9).fill(null).map((_, index) => index);
+
+type UXOG = {
+  boards: Array<MiniBoard>,
+  activeBoardIds: Array<number>,
+}
 
 const UltimateTicTacToeGame = Game({
   name: 'ultimate-tic-tac-toe',
 
-  setup: () => ({
-    boards: createInitialBoards(),
-    activeBoardIds: createInitialActiveBoardIds()
+  setup: (): UXOG => ({
+    boards: createInitialMiniBoards(),
+    activeBoardIds: createInitialActiveMiniBoardIds(),
   }),
 
   moves: {
-    clickCell(G, ctx, boardId, cellId) {
+    clickCell(G, ctx, boardId: number, cellId: number) {
       const clickedBoard = G.boards.find(b => b.id === boardId);
       const clickedCell = clickedBoard.cells[cellId];
-      const isBoardActive =
-        G.activeBoardIds.filter(id => id === boardId).length === 1;
+      const isBoardActive: boolean = G.activeBoardIds.filter(id => id === boardId).length === 1;
 
       // 1. The board is active (can be clicked).
       // 2. The clicked board has no winner yet.
@@ -53,6 +78,7 @@ const UltimateTicTacToeGame = Game({
         }
 
         // 3.
+        // eslint-disable-next-line no-param-reassign
         G.boards[boardId] = clickedBoard;
 
         // 4.
@@ -60,13 +86,13 @@ const UltimateTicTacToeGame = Game({
 
         // 4.1
         if (nextActiveBoard.winner === null) {
+          // eslint-disable-next-line no-param-reassign
           G.activeBoardIds = [cellId];
         }
         // 4.2
         else {
-          G.activeBoardIds = G.boards
-            .filter(b => b.winner === null)
-            .map(b => b.id);
+          // eslint-disable-next-line no-param-reassign
+          G.activeBoardIds = G.boards.filter(b => b.winner === null).map(b => b.id);
         }
 
         // 5.
@@ -77,33 +103,30 @@ const UltimateTicTacToeGame = Game({
         // The move is not valid so no need to return G because of the
         // immer plugin again.
       }
-    }
+    },
   },
 
   flow: {
-    // only if this function returns 'undefined' game will continue.
+    // Only if this function returns 'undefined' game will continue.
     // any other value will terminate the game.
-    endGameIf(G, ctx) {
+    endGameIf(G, ctx): void | GameResult {
       const boardWinners = G.boards.map(b => b.winner);
       const { winner, position } = isVictory(boardWinners);
 
       if (winner) {
-        return { winner: ctx.currentPlayer, position };
-      } else if (isDraw(boardWinners)) {
-        // @TODO: if there is no way to win for any player also finish the game.
-        return { draw: true };
+        return { status: 'WIN', winner: ctx.currentPlayer, position };
       }
-    }
-  }
-});
 
-const createInitialBoards = () => new Array(9).fill(null).map(createBoard);
-const createBoard = (_, index) => ({
-  id: index,
-  cells: new Array(9).fill(null),
-  winner: null
+      // @TODO: if there is no way to win for any player also finish the game.
+      if (isDraw(boardWinners)) {
+        return { status: 'DRAW', draw: true };
+      }
+
+      // Continue the game
+      return undefined;
+    },
+  },
 });
-const createInitialActiveBoardIds = () =>
-  new Array(9).fill(null).map((_, index) => index);
 
 export default UltimateTicTacToeGame;
+export type { MiniBoard, UXOG };

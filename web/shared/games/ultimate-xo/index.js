@@ -1,2 +1,2 @@
-export { default as UltimateTicTacToeBoard } from './board';
-export { default as UltimateTicTacToeGame } from './game';
+export { default as UltimateTicTacToeBoard } from './ui/index';
+export { default as UltimateTicTacToeGame } from './logic/game';

@@ -27,7 +27,7 @@ flow-typed
 # Build directories
 /api/build
 /web/build
-/shared/build
+/web/shared/build
 
 # Optional npm cache directory
 .npm

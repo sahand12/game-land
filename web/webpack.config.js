@@ -12,12 +12,12 @@ const isDev = process.env.NODE_ENV !== 'production';
 const config = {
   entry: './src/index.jsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     // filename: isDev ? '[name].js' : '[name].[chunkhash].js'
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.sass', '.scss', '.css']
+    extensions: ['.js', '.jsx', '.sass', '.scss', '.css'],
   },
   module: {
     rules: [
@@ -25,30 +25,30 @@ const config = {
         enforce: 'pre',
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: { loader: 'eslint-loader' }
+        use: { loader: 'eslint-loader' },
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
-        use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      }
-    ]
+        use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true
+        sourceMap: true,
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({}),
     ],
     splitChunks: {
       cacheGroups: {
@@ -61,25 +61,25 @@ const config = {
           name: 'styles',
           test: /\.css$/,
           chunks: 'all',
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: isDev ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDev ? '[id].css' : '[id].[hash].css'
+      chunkFilename: isDev ? '[id].css' : '[id].[hash].css',
     }),
     new webpack.HashedModuleIdsPlugin(),
     new WebpackChunkHash(),
-    new DashboardPlugin({ port: 5000 })
+    new DashboardPlugin({ port: 5000 }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'build'),
     compress: true,
-    port: 5000
-  }
+    port: 5000,
+  },
 };
 
 module.exports = config;

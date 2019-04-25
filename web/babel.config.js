@@ -16,7 +16,8 @@ module.exports = function(api) {
         useBuiltIns: 'usage',
         loose: true
       }
-    ]
+    ],
+    '@babel/preset-flow'
   ];
   const plugins = [
     '@babel/plugin-transform-runtime',
