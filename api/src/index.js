@@ -1,9 +1,7 @@
 // @flow
-import express from 'express';
-import type { $Application, $Request, $Response } from 'express';
+import { Server as GameServer } from 'boardgame.io/server';
+import UltimateXOGame from '../../web/shared/games/ultimate-xo/game';
 
-const app: $Application = express();
+const server = GameServer({ games: [UltimateXOGame] });
 
-app.get('/', (req: $Request, res: $Response) => res.json({ title: 'hello' }));
-
-app.listen(3003);
+server.run(8000);

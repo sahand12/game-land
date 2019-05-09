@@ -1,15 +1,16 @@
 const path = require('path');
-const webpack = require('webpack');
-const WebpackChunkHash = require('webpack-chunk-hash');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// const webpack = require('webpack');
+// const WebpackChunkHash = require('webpack-chunk-hash');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const DashboardPlugin = require('webpack-dashboard/plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 
-const isDev = process.env.NODE_ENV !== 'production';
+// const isDev = process.env.NODE_ENV !== 'production';
 
 const config = {
+  mode: 'development',
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -37,48 +38,58 @@ const config = {
       {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
-        use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          // MiniCssExtractPlugin.loader **/,
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-      }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
-    splitChunks: {
-      cacheGroups: {
-        // commons: {
-        //   test: /[\\/]node_modules[\\/]/,
-        //   name: 'vendor',
-        //   chunks: 'all'
-        // },
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true,
-        },
-      },
-    },
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: isDev ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDev ? '[id].css' : '[id].[hash].css',
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new WebpackChunkHash(),
-    new DashboardPlugin({ port: 5000 }),
-  ],
+  // optimization: {
+  //   minimizer: [
+  //     new UglifyJsPlugin({
+  //       cache: true,
+  //       parallel: true,
+  //       sourceMap: true,
+  //     }),
+  //     new OptimizeCSSAssetsPlugin({}),
+  //   ],
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       // commons: {
+  //       //   test: /[\\/]node_modules[\\/]/,
+  //       //   name: 'vendor',
+  //       //   chunks: 'all'
+  //       // },
+  //       styles: {
+  //         name: 'styles',
+  //         test: /\.css$/,
+  //         chunks: 'all',
+  //         enforce: true,
+  //       },
+  //     },
+  //   },
+  // },
+  // plugins: [
+  //   new MiniCssExtractPlugin({
+  //     filename: isDev ? '[name].css' : '[name].[hash].css',
+  //     chunkFilename: isDev ? '[id].css' : '[id].[hash].css',
+  //   }),
+  //   new webpack.HashedModuleIdsPlugin(),
+  //   new WebpackChunkHash(),
+  //   new DashboardPlugin({ port: 5000 }),
+  // ],
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
+    contentBase: path.join(__dirname, 'public'),
     compress: true,
     port: 5000,
+  },
+  stats: {
+    colors: true,
+    reasons: true,
+    chunks: false,
   },
 };
 

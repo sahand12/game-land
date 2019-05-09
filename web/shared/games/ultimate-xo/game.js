@@ -1,6 +1,6 @@
 // @flow
 import { Game } from 'boardgame.io/core';
-import { isDraw, isVictory } from '../helpers';
+import { isDraw, isVictory } from './helpers';
 
 type GameResult = {
   status: 'WIN' | 'DRAW',
@@ -8,13 +8,17 @@ type GameResult = {
   winner?: string,
   draw?: boolean,
 };
-type MiniBoard = {
+// type MiniBoardCellState = {
+//   player: string,
+//   value: '',
+// }
+type MiniBoardState = {
   id: number,
   cells: Array<string | null>,
   winner: null | string,
 };
 
-const createMiniBoard = (_, index): MiniBoard => ({
+const createMiniBoard = (_, index): MiniBoardState => ({
   id: index,
   cells: new Array(9).fill(null),
   winner: null,
@@ -23,12 +27,12 @@ const createInitialMiniBoards = () => new Array(9).fill(null).map(createMiniBoar
 const createInitialActiveMiniBoardIds = () => new Array(9).fill(null).map((_, index) => index);
 
 type UXOG = {
-  boards: Array<MiniBoard>,
+  boards: Array<MiniBoardState>,
   activeBoardIds: Array<number>,
-}
+};
 
-const UltimateTicTacToeGame = Game({
-  name: 'ultimate-tic-tac-toe',
+const UltimateXOGame = Game({
+  name: 'ultimate-xo',
 
   setup: (): UXOG => ({
     boards: createInitialMiniBoards(),
@@ -36,7 +40,7 @@ const UltimateTicTacToeGame = Game({
   }),
 
   moves: {
-    clickCell(G, ctx, boardId: number, cellId: number) {
+    clickCell(G: Object, ctx: Object, boardId: number, cellId: number) {
       const clickedBoard = G.boards.find(b => b.id === boardId);
       const clickedCell = clickedBoard.cells[cellId];
       const isBoardActive: boolean = G.activeBoardIds.filter(id => id === boardId).length === 1;
@@ -109,7 +113,7 @@ const UltimateTicTacToeGame = Game({
   flow: {
     // Only if this function returns 'undefined' game will continue.
     // any other value will terminate the game.
-    endGameIf(G, ctx): void | GameResult {
+    endGameIf(G: Object, ctx: Object): void | GameResult {
       const boardWinners = G.boards.map(b => b.winner);
       const { winner, position } = isVictory(boardWinners);
 
@@ -128,5 +132,5 @@ const UltimateTicTacToeGame = Game({
   },
 });
 
-export default UltimateTicTacToeGame;
-export type { MiniBoard, UXOG };
+export default UltimateXOGame;
+export type { MiniBoardState, UXOG };

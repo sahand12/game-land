@@ -31,7 +31,7 @@ const isVictory = (cells: Array<null | string>) => {
       return { winner: true, position: pos };
     }
   }
-  return { winner: false };
+  return { winner: false, position: undefined };
 };
 
 const isDraw = (cells: Array<null | string>) =>
