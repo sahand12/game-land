@@ -11,8 +11,13 @@ const UltimateXOClient = Client({
 });
 
 const App = () => (
-  <div className="tw-flex tw-justify-around tw-py-4">
+  <div className="tw-flex tw-flex-wrap ">
     <UltimateXOClient playerID="0" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <UltimateXOClient playerID="1" />
   </div>
 );

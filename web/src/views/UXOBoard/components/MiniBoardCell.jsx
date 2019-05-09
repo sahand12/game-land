@@ -12,7 +12,7 @@ type Props = {
 const MiniBoardCell = ({ boardId, cellId, onCellClick, value }: Props) => (
   // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
   <div
-    className="ux-board__cell tw-bg-violet-darker tw-rounded"
+    className="ux-board__cell tw-rounded"
     onClick={() => onCellClick(boardId, cellId)}
   >
     <PlayerSymbol player={value} />

@@ -18,7 +18,11 @@ function renderMiniBoards(G, moves: { [string]: Function }, isActive: boolean) {
   const { boards, activeBoardIds } = G;
 
   function isMoveValid(boardId: number, cellId: number) {
-    return isActive && boards[boardId].winner === null && boards[boardId].cells[cellId] === null;
+    return (
+      isActive &&
+      boards[boardId].winner === null &&
+      boards[boardId].cells[cellId] === null
+    );
   }
 
   function onClick(boardId: number, cellId: number) {
@@ -43,7 +47,10 @@ function renderMiniBoards(G, moves: { [string]: Function }, isActive: boolean) {
 }
 const UltimateTicTacToeBoard = ({ G, moves, isActive }: Props) => {
   return (
-    <div className="ux-board tw-flex tw-flex-wrap tw-justify-between tw-bg-violet">
+    <div
+      className="ux-board tw-flex tw-flex-wrap tw-justify-between"
+      style={{ margin: '0 100px auto', marginBottom: '100px', marginTop: 50 }}
+    >
       {renderMiniBoards(G, moves, isActive)}
     </div>
   );
