@@ -31,10 +31,9 @@ const PreBoard = () => {
     </div>
   );
 };
-const PreMiniBoard = ({cells}) => <div className="miniBoard">{
-
-}</div>;
-const PreCell = () => <div className="cell"></div>;
-
+// const PreMiniBoard = ({cells}) => <div className="miniBoard">{
+//
+// }</div>;
+// const PreCell = () => <div className="cell"></div>;
 
 export default PreBoard;

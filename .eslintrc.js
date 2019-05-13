@@ -26,6 +26,7 @@ module.exports = {
   plugins: ['react', 'react-hooks', 'eslint-plugin-flowtype'],
   rules: {
     // 'arrow-parens': [1, 'as-needed'],
+    'no-use-before-define': 'off',
   },
 };
 
