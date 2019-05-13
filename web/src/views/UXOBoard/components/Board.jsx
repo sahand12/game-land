@@ -48,7 +48,7 @@ function renderMiniBoards(G, moves: { [string]: Function }, isActive: boolean) {
 const UltimateTicTacToeBoard = ({ G, moves, isActive }: Props) => {
   return (
     <div
-      className="ux-board tw-flex tw-flex-wrap tw-justify-between"
+      className="gl-uxo-board"
       style={{ margin: '0 100px auto', marginBottom: '100px', marginTop: 50 }}
     >
       {renderMiniBoards(G, moves, isActive)}
