@@ -4,12 +4,14 @@ import type { MiniBoardState } from '../../../../shared/games/ultimate-xo/game';
 import MiniBoardCell from './MiniBoardCell';
 
 type Props = {
-  active: boolean,
+  isMyTurn: boolean,
+  isPlayable: boolean,
   board: MiniBoardState,
   onCellClick: (boardId: number, cellId: number) => void,
 };
-const MiniBoard = ({ active, board, onCellClick }: Props) => {
+const MiniBoard = ({ isMyTurn, isPlayable, board, onCellClick }: Props) => {
   const cells = [];
+  const canBePlayedByMe = isMyTurn && isPlayable;
   if (board.winner === null) {
     for (let i = 0; i < 9; i += 1) {
       cells.push(
@@ -23,7 +25,13 @@ const MiniBoard = ({ active, board, onCellClick }: Props) => {
       );
     }
   }
-  return <div className={`ux-board__miniBoard ${active ? 'active' : ''}`}>{cells}</div>;
+  return (
+    <div
+      className={`gl-uxo__board__miniboard ${canBePlayedByMe ? 'active' : ''}`}
+    >
+      {cells}
+    </div>
+  );
 };
 
 export default MiniBoard;

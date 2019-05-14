@@ -9,8 +9,20 @@ type Props = {
   isActive: boolean,
 };
 
-const UltimateTicTacToeBoard = ({ G, moves, isActive }: Props) => {
-  return <div className="gl-uxo-board">{renderMiniBoards({ G, moves, isActive })}</div>;
+const UXOBoard = ({ G, moves, isActive }: Props) => (
+  <div className="gl-uxo__board">
+    {renderMiniBoards({ G, moves, isActive })}
+  </div>
+);
+
+const UltimateXOPage = ({ G, moves, isActive }: Props) => {
+  return (
+    <div className="gl-uxo__page">
+      <div className="gl-uxo__boardContainer">
+        <UXOBoard G={G} moves={moves} isActive={isActive} />
+      </div>
+    </div>
+  );
 };
 
 function renderMiniBoards({ G, moves, isActive }: Props) {
@@ -50,4 +62,4 @@ function renderMiniBoards({ G, moves, isActive }: Props) {
   }
 }
 
-export default UltimateTicTacToeBoard;
+export default UltimateXOPage;

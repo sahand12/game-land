@@ -1,25 +1,23 @@
 // @flow
 import * as React from 'react';
 
-// const IconX = ({ color }: { color: string }) => (
 const IconX = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 28 28"
+    viewBox="0 0 16 16"
     className="icon-x"
   >
-    <path d="M28 22.4L19.6 14 28 5.6 22.4 0 14 8.4 5.6 0 0 5.6 8.4 14 0 22.4 5.6 28l8.4-8.4 8.4 8.4z" />
+    <path d="M16 12.8L11.2 8L16 3.2L12.8 0L8 4.8L3.2 0L0 3.2L4.8 8L0 12.8L3.2 16L8 11.2L12.8 16L16 12.8Z"/>
   </svg>
 );
 
-// const IconO = ({ color }: { color: string }) => (
 const IconO = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 100 100"
+    viewBox="0 0 16 16"
     className="icon-o"
   >
-    <circle cx="50" cy="50" r="36" strokeWidth="28" />
+    <path d="M10.5 8C10.5 9.38071 9.38071 10.5 8 10.5C6.61929 10.5 5.5 9.38071 5.5 8C5.5 6.61929 6.61929 5.5 8 5.5C9.38071 5.5 10.5 6.61929 10.5 8Z" />
   </svg>
 );
 export { IconX, IconO };

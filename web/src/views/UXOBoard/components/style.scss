@@ -1,123 +1,90 @@
-@import 'vars';
-$secondary_color: #22155b;
-$primary_color: #624bc0;
-$board_d: 300px;
-$miniBoard_d: 96px;
-$miniBoard_margin_bottom: 6px;
-$cell_d: 30px;
-$green: rgb(41, 207, 122);
-body {
-  background: $greenhouse-girl-5-hex;
-  height: 100vh;
+/**
+ * everything is gonna be namespaced: gl: game-land, uxo: ultimate xo
+ */
+$board_side: 300px;
+$board_width: $board_side;
+$board_height: $board_side;
+
+$cell_bgcolor: #332267;
+$cell_borderRadius: 4px;
+$cell_margin: 2px;
+
+$page_bgcolor: #664dc1;
+
+$x-color: #eb1650;
+$o-color: #ffff00;
+
+.gl-uxo__page {
+  width: 100vw;
+  height: 100%;
 }
-*,
-* * {
-  padding: 0;
-  margin: 0;
+.gl-uxo__boardContainer {
+  background-color: $page_bgcolor;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
 }
-
-.ux-board {
-  width: $board_d;
-  height: $board_d;
-  align-items: flex-start;
-
-  color: blue;
-  svg {
-    fill: currentColor;
-  }
+.gl-uxo__board {
+  width: $board_width;
+  height: $board_height;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
 }
-.ux-board--is-my-turn {
-}
-.ux-board__miniBoard {
-  //border: 1px solid white;
+.gl-uxo__board__miniboard {
+  width: calc((100% - 2 * 3%) / 3);
+  height: calc((100% - 2 * 3%) / 3);
+  margin-bottom: 3%;
+  opacity: 0.7;
 
-  flex-basis: $miniBoard_d;
-  height: $miniBoard_d;
-
-  //flex-shrink: 0;
-  //flex-grow: 0;
-
-  &:not(:nth-child(n + 7)) {
-    margin-bottom: $miniBoard_margin_bottom;
+  &:nth-child(n + 7) {
+    margin-bottom: 0;
   }
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  opacity: 0.7;
+  justify-content: space-between;
 
   &.active {
-    transition: opacity 0.25s ease-in;
-    //border: 1px solid coral;
-    //box-shadow: 0px 0px 5px 5px rgba(232,228,240,1);
+    transition: opacity 0.15s ease-in;
     opacity: 1;
-    transform: scale3d(1, 1, 1.1);
-    border-radius: 5px;
+    border-radius: $cell_borderRadius;
     cursor: pointer;
+  }
+}
+.gl-uxo__board__cell {
+  width: calc((100% - 2 * #{$cell_margin}) / 3);
+  height: calc((100% - 2 * #{$cell_margin}) / 3);
+  background: $cell_bgcolor;
+  margin-bottom: $cell_margin;
+  border-radius: $cell_borderRadius;
+
+  &:nth-child(n + 7) {
+    margin-bottom: 0;
   }
 }
 .ux-board__miniBoard--is-playable {
   border: 1px solid white;
 }
-.ux-board__board--is-unclickable {
-}
-.ux-board__board--is-over {
-}
-.ux-board__board__row {
-}
-.ux-board__cell {
-  background: $greenhouse-girl-4-hex;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-}
-.ux-board__row {
-}
-.ux-board__cell {
-}
+.gl-uxo__board__playerSymbol {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.ux-board__time-state {
-}
-.ux-board__turns-state {
-}
-.ux-board__players-state {
-}
-.ux-board__symbol {
-}
-.ux-board__symbol-x {
-}
-.ux-board__symbol-o {
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .icon-o {
-  stroke: red;
+  stroke-width: 11;
+  stroke: $o-color;
   fill: transparent;
 }
 .icon-x {
-  color: blue;
-}
-
-/**
- * Animation
- */
-@keyframes diamondMoves {
-  from {
-    transform: translateX(-400px);
-  }
-  to {
-    transform: translateX(0px);
-  }
-}
-.diamond {
-  animation-name: diamondMoves;
-  animation-duration: 5s;
-  animation-iteration-count: 1;
-  animation-timing-function: linear;
-  animation-delay: 600ms;
-}
-
-@keyframes opponentMove {
-}
-@keyframes myMove {
+  fill: $x-color;
 }
