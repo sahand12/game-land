@@ -17,12 +17,12 @@ $o-color: #ffff00;
 .gl-uxo__page {
   width: 100vw;
   height: 100%;
+  background-color: $page_bgcolor;
 }
 .gl-uxo__boardContainer {
-  background-color: $page_bgcolor;
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: 20px calc((100% - #{$board_side}) / 2);
 }
 .gl-uxo__board {
   width: $board_width;
