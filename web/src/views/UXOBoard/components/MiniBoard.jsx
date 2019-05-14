@@ -2,16 +2,24 @@
 import React from 'react';
 import type { MiniBoardState } from '../../../../shared/games/ultimate-xo/game';
 import MiniBoardCell from './MiniBoardCell';
+import PlayerSymbol from './PlayerSymbol';
 
 type Props = {
   isMyTurn: boolean,
   isPlayable: boolean,
+  hasWinner: boolean,
   board: MiniBoardState,
   onCellClick: (boardId: number, cellId: number) => void,
 };
-const MiniBoard = ({ isMyTurn, isPlayable, board, onCellClick }: Props) => {
-  const cells = [];
-  const canBePlayedByMe = isMyTurn && isPlayable;
+const MiniBoard = ({
+  isMyTurn,
+  isPlayable,
+  hasWinner,
+  board,
+  onCellClick,
+}: Props) => {
+  let cells = [];
+  const canBePlayedByMe = isMyTurn && isPlayable && !hasWinner;
   if (board.winner === null) {
     for (let i = 0; i < 9; i += 1) {
       cells.push(
@@ -24,14 +32,26 @@ const MiniBoard = ({ isMyTurn, isPlayable, board, onCellClick }: Props) => {
         />
       );
     }
+  } else {
+    cells = <MiniBoardWithWinner winner={board.winner} />;
   }
   return (
     <div
-      className={`gl-uxo__board__miniboard ${canBePlayedByMe ? 'active' : ''}`}
+      className={`
+        gl-uxo__board__miniboard
+        ${hasWinner ? 'has-winner' : ''}
+        ${canBePlayedByMe ? 'active' : ''}
+      `}
     >
       {cells}
     </div>
   );
 };
+
+const MiniBoardWithWinner = ({ winner }: { winner: string }) => (
+  <div className="gl-uxo__board__winner">
+    <PlayerSymbol player={winner} />
+  </div>
+);
 
 export default MiniBoard;

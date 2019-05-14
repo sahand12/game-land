@@ -34,6 +34,7 @@ function renderMiniBoards({ G, moves, isActive }: Props) {
       <MiniBoard
         key={i}
         board={boards[i]}
+        hasWinner={boards[i].winner !== null}
         isMyTurn={isActive} // I can make a move
         isPlayable={activeBoardIds.includes(i)} // This mini board can be played by me or by the other player does not matter
         onCellClick={onClick}

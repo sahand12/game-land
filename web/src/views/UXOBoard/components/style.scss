@@ -1,7 +1,7 @@
 /**
  * everything is gonna be namespaced: gl: game-land, uxo: ultimate xo
  */
-$board_side: 300px;
+$board_side: 360px;
 $board_width: $board_side;
 $board_height: $board_side;
 
@@ -18,6 +18,12 @@ $o-color: #ffff00;
   width: 100vw;
   height: 100%;
   background-color: $page_bgcolor;
+
+  user-select: none;
+
+  & * {
+    user-select: none;
+  }
 }
 .gl-uxo__boardContainer {
   width: 100%;
@@ -52,6 +58,10 @@ $o-color: #ffff00;
     border-radius: $cell_borderRadius;
     cursor: pointer;
   }
+
+  &.has-winner {
+    opacity: 1;
+  }
 }
 .gl-uxo__board__cell {
   width: calc((100% - 2 * #{$cell_margin}) / 3);
@@ -75,9 +85,18 @@ $o-color: #ffff00;
   align-items: center;
 
   svg {
-    width: 16px;
-    height: 16px;
+    box-sizing: content-box;
+    padding: 1px;
+    width: 53%;
+    height: 53%;
   }
+}
+.gl-uxo__board__winner {
+  width: 100%;
+  height: 100%;
+  border-radius: $cell_borderRadius;
+  background: $cell_bgcolor;
+  opacity: 1 !important;
 }
 
 .icon-o {
