@@ -1,0 +1,252 @@
+/**
+ * everything is gonna be namespaced: gl: game-land, uxo: ultimate xo
+ */
+$board_side: 360px;
+$board_width: $board_side;
+$board_height: $board_side;
+
+$cell_bgcolor: #332267;
+$cell_borderRadius: 4px;
+$cell_margin: 2px;
+
+$page_bgcolor: #664dc1;
+
+$x-color: #eb1650;
+$o-color: #ffff00;
+
+.gl-uxo__page {
+  width: 100vw;
+  height: 100%;
+  background-color: $page_bgcolor;
+
+  user-select: none;
+
+  & * {
+    user-select: none;
+  }
+}
+.gl-uxo__boardContainer {
+  width: 100%;
+  height: 100%;
+  padding: 20px calc((100% - #{$board_side}) / 2);
+}
+.gl-uxo__board {
+  width: $board_width;
+  height: $board_height;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.gl-uxo__board__miniboard {
+  width: calc((100% - 2 * 3%) / 3);
+  height: calc((100% - 2 * 3%) / 3);
+  margin-bottom: 3%;
+  opacity: 0.7;
+
+  &:nth-child(n + 7) {
+    margin-bottom: 0;
+  }
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &.active {
+    transition: opacity 0.15s ease-in;
+    opacity: 1;
+    border-radius: $cell_borderRadius;
+    cursor: pointer;
+  }
+
+  &.has-winner {
+    opacity: 1;
+  }
+}
+.gl-uxo__board__cell {
+  width: calc((100% - 2 * #{$cell_margin}) / 3);
+  height: calc((100% - 2 * #{$cell_margin}) / 3);
+  background: $cell_bgcolor;
+  margin-bottom: $cell_margin;
+  border-radius: $cell_borderRadius;
+
+  &:nth-child(n + 7) {
+    margin-bottom: 0;
+  }
+}
+.ux-board__miniBoard--is-playable {
+  border: 1px solid white;
+}
+.gl-uxo__board__playerSymbol {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    box-sizing: content-box;
+    padding: 1px;
+    width: 53%;
+    height: 53%;
+  }
+}
+.gl-uxo__board__winner {
+  width: 100%;
+  height: 100%;
+  border-radius: $cell_borderRadius;
+  background: $cell_bgcolor;
+  opacity: 1 !important;
+}
+
+.icon-o {
+  stroke-width: 4px;
+  stroke: $o-color;
+  fill: none;
+  animation: heartBeat 0.6s;
+
+  .gl-uxo--is-first-player & {
+    animation: lightSpeedIn 0.6s ease-in-out;
+  }
+}
+.icon-x {
+  fill: $x-color;
+  animation: heartBeat 0.6s ease-in-out;
+
+  .gl-uxo--is-second-player & {
+    animation: lightSpeedIn 0.75s;
+  }
+}
+@keyframes lightSpeedIn {
+  from {
+    transform: translate3d(100%, 0, 0) skewX(-30deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: skewX(20deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: skewX(-5deg);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.lightSpeedIn {
+  animation-name: lightSpeedIn;
+  animation-timing-function: ease-out;
+}
+@keyframes bounceIn {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes flash {
+  from,
+  50%,
+  to {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.3);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.3);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rubberBand {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.rubberBand {
+  animation-name: rubberBand;
+}
+
+.flash {
+  animation-name: flash;
+}

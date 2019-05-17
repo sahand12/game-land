@@ -1,31 +1,41 @@
 // @flow
 import React from 'react';
+
+import { PlayerIDContext } from '../../contexts/boardgameio';
 import MiniBoard from './MiniBoard';
-import './style.scss';
+import './style-dots.scss';
 
 type Props = {
   G: Object,
   moves: { [string]: Function },
   isActive: boolean,
+  playerID: string,
 };
 
-const UXOBoard = ({ G, moves, isActive }: Props) => (
-  <div className="gl-uxo__board">
-    {renderMiniBoards({ G, moves, isActive })}
-  </div>
+const UXOBoard = ({ G, moves, isActive, playerID }: Props) => (
+  <PlayerIDContext.Provider value={playerID}>
+    <div
+      className={`gl-uxo__board ${
+        playerID === '0' ? 'gl-uxo--is-first-player' : 'gl-uxo--is-second-player'
+      }`}
+    >
+      {renderMiniBoards({ G, moves, isActive, playerID })}
+    </div>
+  </PlayerIDContext.Provider>
 );
 
-const UltimateXOPage = ({ G, moves, isActive }: Props) => {
+const UltimateXOPage = (props: Props) => {
+  const { G, moves, isActive, playerID } = props;
   return (
     <div className="gl-uxo__page">
       <div className="gl-uxo__boardContainer">
-        <UXOBoard G={G} moves={moves} isActive={isActive} />
+        <UXOBoard G={G} moves={moves} isActive={isActive} playerID={playerID} />
       </div>
     </div>
   );
 };
 
-function renderMiniBoards({ G, moves, isActive }: Props) {
+function renderMiniBoards({ G, moves, isActive, playerID }: Props) {
   const { boards, activeBoardIds } = G;
   const miniBoards = [];
 
@@ -33,6 +43,7 @@ function renderMiniBoards({ G, moves, isActive }: Props) {
     miniBoards.push(
       <MiniBoard
         key={i}
+        playerID={playerID}
         board={boards[i]}
         hasWinner={boards[i].winner !== null}
         isMyTurn={isActive} // I can make a move

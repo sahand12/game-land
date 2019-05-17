@@ -11,6 +11,7 @@ const MovesContext = createContext();
 const CtxContext = createContext();
 const GContext = createContext();
 const IsMultiplayerContext = createContext();
+const PlayerIDContext = createContext();
 
 export {
   CtxContext,
@@ -20,6 +21,7 @@ export {
   IsConnectedContext,
   IsMultiplayerContext,
   MovesContext,
+  PlayerIDContext,
   RedoContext,
   ResetContext,
   UndoContext,
