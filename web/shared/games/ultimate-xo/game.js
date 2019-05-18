@@ -1,49 +1,42 @@
 // @flow
 import { Game } from 'boardgame.io/core';
 import { isDraw, isVictory } from './helpers';
+import type {
+  UXOGameState,
+  UXOGameStatusAfterMove,
+  UXOMiniBoardState,
+} from './types';
 
-type GameResult = {
-  status: 'WIN' | 'DRAW',
-  position?: Array<number>,
-  winner?: string,
-  draw?: boolean,
-};
-// type MiniBoardCellState = {
-//   player: string,
-//   value: '',
-// }
-type MiniBoardState = {
-  id: number,
-  cells: Array<string | null>,
-  winner: null | string,
-};
+function createInitialMiniBoards(): Array<UXOMiniBoardState> {
+  return new Array(9).fill(null).map(createMiniBoard);
 
-const createMiniBoard = (_, index): MiniBoardState => ({
-  id: index,
-  cells: new Array(9).fill(null),
-  winner: null,
-});
-const createInitialMiniBoards = () => new Array(9).fill(null).map(createMiniBoard);
-const createInitialActiveMiniBoardIds = () => new Array(9).fill(null).map((_, index) => index);
+  function createMiniBoard(_, index): UXOMiniBoardState {
+    return {
+      id: index,
+      cells: new Array(9).fill(null),
+      winner: null,
+    };
+  }
+}
 
-type UXOG = {
-  boards: Array<MiniBoardState>,
-  activeBoardIds: Array<number>,
-};
+function createInitialActiveMiniBoardIds(): Array<number> {
+  return new Array(9).fill(null).map((_, index) => index);
+}
 
 const UltimateXOGame = Game({
   name: 'ultimate-xo',
 
-  setup: (): UXOG => ({
+  setup: (): UXOGameState => ({
     boards: createInitialMiniBoards(),
     activeBoardIds: createInitialActiveMiniBoardIds(),
   }),
 
   moves: {
-    clickCell(G: Object, ctx: Object, boardId: number, cellId: number) {
+    clickCell(G: UXOGameState, ctx: Object, boardId: number, cellId: number) {
       const clickedBoard = G.boards.find(b => b.id === boardId);
       const clickedCell = clickedBoard.cells[cellId];
-      const isBoardActive: boolean = G.activeBoardIds.filter(id => id === boardId).length === 1;
+      const isBoardActive: boolean =
+        G.activeBoardIds.filter(id => id === boardId).length === 1;
 
       // 1. The board is active (can be clicked).
       // 2. The clicked board has no winner yet.
@@ -96,7 +89,9 @@ const UltimateXOGame = Game({
         // 4.2
         else {
           // eslint-disable-next-line no-param-reassign
-          G.activeBoardIds = G.boards.filter(b => b.winner === null).map(b => b.id);
+          G.activeBoardIds = G.boards
+            .filter(b => b.winner === null)
+            .map(b => b.id);
         }
 
         // 5.
@@ -113,7 +108,7 @@ const UltimateXOGame = Game({
   flow: {
     // Only if this function returns 'undefined' game will continue.
     // any other value will terminate the game.
-    endGameIf(G: Object, ctx: Object): void | GameResult {
+    endGameIf(G: UXOGameState, ctx: Object): UXOGameStatusAfterMove | void {
       const boardWinners = G.boards.map(b => b.winner);
       const { winner, position } = isVictory(boardWinners);
 
@@ -123,7 +118,7 @@ const UltimateXOGame = Game({
 
       // @TODO: if there is no way to win for any player also finish the game.
       if (isDraw(boardWinners)) {
-        return { status: 'DRAW', draw: true };
+        return { status: 'DRAW' };
       }
 
       // Continue the game
@@ -133,4 +128,3 @@ const UltimateXOGame = Game({
 });
 
 export default UltimateXOGame;
-export type { MiniBoardState, UXOG };
