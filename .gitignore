@@ -47,3 +47,5 @@ flow-typed
 
 # IDE spefic files
 .idea
+
+.DS_Store
