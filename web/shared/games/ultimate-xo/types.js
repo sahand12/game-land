@@ -46,7 +46,7 @@ type UXOGameStatusAfterMove = {
   winPosition?: UXOWinPosition,
 };
 
-export {
+export type {
   UXOPlayerSymbol,
   UXOCell,
   UXOCells,
