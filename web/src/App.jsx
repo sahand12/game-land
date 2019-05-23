@@ -9,7 +9,7 @@ const UltimateXOClient = Client({
   game: UltimateXOGame,
   board: UltimateXOPage,
   multiplayer: { local: true },
-  // debug: false,
+  debug: false,
 });
 
 const AppBoard = () => (
