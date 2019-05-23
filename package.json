@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "dev:web": "cd web && yarn run dev",
-    "dev:api": "cd api && yarn run dev"
+    "dev:api": "cd api && yarn run dev",
+    "test:web": "cd web && yarn run test"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

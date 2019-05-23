@@ -91,7 +91,91 @@ const xoData = {
       position: [2, 4, 6],
     },
   ],
-  drawBoards: [],
+
+  // The result of these boards is draw
+  drawBoards: [
+    {
+      // prettier-ignore
+      cells: [
+        '0', '1', '0',
+        '1', '0', '0',
+        '1', '0', '1'
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '1', '0', '0',
+        '0', '1', '1',
+        '1', '1', '0'
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '0', '1', '0',
+        '0', '1', '1',
+        '1', '1', '0',
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '0', '1', '0',
+        '0', '1', '1',
+        '1', '0', '0'
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '0', '0', '1',
+        '1', '0', '0',
+        '0', '1', '1',
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '0', '0', '1',
+        '0', '0', '1',
+        '1', '1', '0',
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '0', '1', '1',
+        '1', '1', '0',
+        '0', '0', '1',
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '1', '0', '0',
+        '1', '0', '0',
+        '0', '1', '1'
+      ],
+      winner: null,
+    },
+    {
+      // prettier-ignore
+      cells: [
+        '1', '0', '1',
+        '1', '0', '0',
+        '0', '1', '1',
+      ],
+      winner: null,
+    },
+  ],
   undeterminedBoards: [],
 };
 
