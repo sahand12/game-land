@@ -1,12 +1,14 @@
+@import '~bulma';
 .gl-s-top {
 } // only semantic}
 .gl-s-bottom {
 } // only semantic}
 .gl-uxo__topStatusBar {
-  height: 130px;
   width: 360px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 30px;
+  border: 1px solid white;
   //background: white;
 
   .gl-s-top {
@@ -29,19 +31,121 @@
 }
 .gl-uxo__topStatusBar__left {
   background: white;
-  width: calc(100% / 5);
+  flex-basis: calc(100% / 5);
+  flex-shrink: 0;
   height: 80px;
   border-radius: 9px;
+  border-bottom-right-radius: 0;
 }
 .gl-uxo__topStatusBar__right {
-  width: calc(100% / 5);
+  flex-basis: calc(100% / 5);
+  flex-shrink: 0;
   height: 80px;
   background: white;
   border-radius: 9px;
+  border-bottom-left-radius: 0;
 }
 .gl-uxo__topStatusBar__center {
+  flex-basis: 60%;
   height: 65px;
   background: white;
   width: 100%;
   align-self: flex-end;
+}
+// test
+$side-radius: 9px;
+.test-wrapper {
+  padding-top: 20px;
+  width: 360px;
+  margin: 0 auto;
+}
+.root {
+  //border: 1px solid white;
+  width: 100%;
+}
+.indicator,
+.info {
+  width: 100%;
+}
+.indicator {
+  width: 20%;
+  display: flex;
+  transition: transform 250ms cubic-bezier(0.19, 1, 0.22, 1);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 3px;
+}
+.moved {
+  transform: translateX(400%);
+}
+.indicator-text {
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: Lalezar;
+}
+.indicator-icon {
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+
+  svg {
+    display: block;
+    width: 100%;
+  }
+}
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.left,
+.right {
+  height: 80px;
+  background: white;
+  flex-basis: 20%;
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right {
+  border-radius: $side-radius $side-radius $side-radius 0;
+}
+.left {
+  border-radius: $side-radius $side-radius 0 $side-radius;
+}
+.center {
+  align-self: flex-end;
+  flex-basis: 1%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 70px;
+  background: white;
+
+  font-family: Lalezar;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.player-info {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: center;
+  //align-items: center;
+  flex-basis: 40%;
+
+  & > * {
+    flex-basis: 100%;
+  }
+
+  .symbol > * {
+    width: 40px;
+    margin: 0 auto;
+  }
 }

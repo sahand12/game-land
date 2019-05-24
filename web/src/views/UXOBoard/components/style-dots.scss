@@ -5,14 +5,14 @@ $board_side: 360px;
 $board_width: $board_side;
 $board_height: $board_side;
 
-$cell_bgcolor: #332267;
+$cell_bgcolor: white;
 $cell_borderRadius: 4px;
 $cell_margin: 2px;
 
-$page_bgcolor: #664dc1;
+$page_bgcolor: #363d5b;
 
-$x-color: #eb1650;
-$o-color: #ffff00;
+$x-color: #CD7567;
+$o-color: #43A9A7;
 
 .gl-uxo__page {
   width: 100vw;
