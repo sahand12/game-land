@@ -8,7 +8,8 @@
   "scripts": {
     "dev:web": "cd web && yarn run dev",
     "dev:api": "cd api && yarn run dev",
-    "test:web": "cd web && yarn run test"
+    "test:web": "cd web && yarn run test",
+    "fake:api": "cd fake-api && yarn json-server --watch db.json"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

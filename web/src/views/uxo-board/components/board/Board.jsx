@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 
-import { PlayerIDContext } from '../../contexts/boardgameio';
-import MiniBoard from './MiniBoard';
+import { PlayerIDContext } from '../../contexts/index';
+import MiniBoard from '../mini-board/MiniBoard';
 import TopStatusBar from '../top-status-bar/index';
-import './style-dots.scss';
+import '../style-dots.scss';
 
 type Props = {
   G: Object,
@@ -13,22 +13,24 @@ type Props = {
   playerID: string,
 };
 
-const UXOBoard = ({ G, moves, isActive, playerID }: Props) => (
-  <PlayerIDContext.Provider value={playerID}>
-    <div
-      className={`gl-uxo__board ${
-        playerID === '0'
-          ? 'gl-uxo--is-first-player'
-          : 'gl-uxo--is-second-player'
-      }`}
-    >
-      {renderMiniBoards({ G, moves, isActive, playerID })}
-    </div>
-  </PlayerIDContext.Provider>
-);
-
-const UltimateXOPage = (props: Props) => {
+function UXOBoard({ G, moves, isActive, playerID }: Props) {
+  return (
+    <PlayerIDContext.Provider value={playerID}>
+      <div
+        className={`gl-uxo__board ${
+          playerID === '0'
+            ? 'gl-uxo--is-first-player'
+            : 'gl-uxo--is-second-player'
+        }`}
+      >
+        {renderMiniBoards({ G, moves, isActive, playerID })}
+      </div>
+    </PlayerIDContext.Provider>
+  );
+}
+function UXOPage(props: Props) {
   const { G, moves, isActive, playerID } = props;
+
   return (
     <div className="gl-uxo__page">
       <TopStatusBar />
@@ -37,8 +39,7 @@ const UltimateXOPage = (props: Props) => {
       </div>
     </div>
   );
-};
-
+}
 function renderMiniBoards({ G, moves, isActive, playerID }: Props) {
   const { boards, activeBoardIds } = G;
   const miniBoards = [];
@@ -78,4 +79,4 @@ function renderMiniBoards({ G, moves, isActive, playerID }: Props) {
   }
 }
 
-export default UltimateXOPage;
+export default UXOPage;

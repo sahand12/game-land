@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": "1234",
+      "nickname": "farzad",
+      "avatar": "miniman/chef"
+    },
+    {
+      "id": "3213",
+      "nickname": "sahand",
+      "avatar": "miniman/alien"
+    },
+    {
+      "id": "3322",
+      "nickname": "azin",
+      "avatar": "miniman/boy"
+    },
+    {
+      "nickname": "isun",
+      "avatar": "miniman/boy-1",
+      "id": "0FeZGVX"
+    }
+  ],
+  "games": [
+    {
+      "name": "xo",
+      "id": "01"
+    },
+    {
+      "name": "ultimate-xo",
+      "id": "02"
+    }
+  ],
+  "gameInstances": [
+    {
+      "id": "987",
+      "players": [
+        "1234",
+        "3213"
+      ],
+      "moves": [],
+      "winner": null,
+      "startedAt": null,
+      "finishedAt": null,
+      "isFinished": null,
+      "isDiscontinued": null,
+      "result": null
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import PlayerSymbol from './PlayerSymbol';
+import PlayerSymbol from '../PlayerSymbol';
 
 type Props = {
   boardId: number,

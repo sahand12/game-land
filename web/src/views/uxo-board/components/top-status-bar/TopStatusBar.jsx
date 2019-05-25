@@ -1,11 +1,11 @@
 // @flow
-import React, {useState} from 'react';
-import cs from 'classnames';
-import IndicatorIcon from '../../../../assets/icons/indicator.svg';
-import AlienIcon from '../../../../assets/icons/miniman/alien.svg';
-import ChefIcon from '../../../../assets/icons/miniman/chef.svg';
+import React, { useState } from 'react';
+// import cs from 'classnames';
+import IndicatorIcon from '../../../../../assets/icons/indicator.svg';
+import AlienIcon from '../../../../../assets/icons/miniman/alien.svg';
+import ChefIcon from '../../../../../assets/icons/miniman/chef.svg';
 import './style.scss';
-import PlayerSymbol from '../components/PlayerSymbol';
+import PlayerSymbol from '../PlayerSymbol';
 
 const contents = {
   player0name: 'بارسلونا',
@@ -43,7 +43,11 @@ function TopStatusBar() {
         />
         <div
           className="game-info column"
-          style={{ height: 65, alignSelf: 'flex-end', backgroundColor: 'orange' }}
+          style={{
+            height: 65,
+            alignSelf: 'flex-end',
+            backgroundColor: 'orange',
+          }}
         />
         <div className="player-1 column" style={{ backgroundColor: 'white' }} />
       </div>
@@ -51,7 +55,7 @@ function TopStatusBar() {
   );
 }
 function Test() {
-  const [moved, setMoved] = useState(false);
+  const [moved] = useState(false);
   return (
     <div className="test-wrapper">
       <div className="root">
@@ -89,11 +93,11 @@ function Test() {
   );
 }
 
-function playerNameWithSymbol({name, playerId, playerColor, ...rest}: {name: string, playerId: string, playerColor: string}) {
-  return <div {...rest}>
-    <div>{name}</div>
-    <div><PlayerSymbol player={playerId}/></div>
-  </div>
-}
+// function playerNameWithSymbol({name, playerId, playerColor, ...rest}: {name: string, playerId: string, playerColor: string}) {
+//   return <div {...rest}>
+//     <div>{name}</div>
+//     <div><PlayerSymbol player={playerId}/></div>
+//   </div>
+// }
 
 export default Test;

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import type { MiniBoardState } from '../../../../shared/games/ultimate-xo/game';
-import MiniBoardCell from './MiniBoardCell';
-import PlayerSymbol from './PlayerSymbol';
+import type { MiniBoardState } from '../../../../../shared/games/ultimate-xo/types';
+import MiniBoardCell from '../cell/MiniBoardCell';
+import PlayerSymbol from '../PlayerSymbol';
 
 type Props = {
   isMyTurn: boolean,

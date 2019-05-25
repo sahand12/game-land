@@ -5,7 +5,7 @@ import {
   CtxContext,
   IsConnectedContext,
   IsActiveContext,
-} from '../../contexts/boardgameio';
+} from '../../contexts/index';
 
 type Props = {
   G: Object,

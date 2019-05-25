@@ -15,3 +15,4 @@ const data = {
   gameInstanceId: 'id',
   gameName: 'gamename',
 };
+const theme = {};
