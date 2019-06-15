@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     // 'arrow-parens': [1, 'as-needed'],
     'no-use-before-define': 'off',
+    'no-underscore-dangle': 'off',
   },
 };
 
