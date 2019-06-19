@@ -1,18 +1,24 @@
-const data = {
-  players: {
-    player0Id: {
+const gameInstance = {
+  players: [
+    {
+      id: 'serverSideUserID',
       nickname: '',
       avatar: '',
+      playerID: '',
     },
-    player1Id: {
+    {
+      id: 'serverSideUserID',
       nickname: '',
-      avatar: ''
+      avatar: '',
+      playerID: '',
     },
+  ],
+  gameInfo: {
+    id: '',
+    name: '',
+    firstTurn: 'userID',
   },
-  mySelf: 'player0Id or player1Id',
-  firstTurn: 'player0Id or player1Id',
+  // mySelf: 'player0Id or player1Id',
   isSpectator: 'boolean',
-  gameInstanceId: 'id',
-  gameName: 'gamename',
 };
 const theme = {};

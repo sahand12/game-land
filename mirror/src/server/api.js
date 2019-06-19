@@ -108,8 +108,62 @@ function addApiToServer({ app, db, games, lobbyConfig }) {
     ctx.body = strippedRoom;
   });
 
-  router.post('/games/:name/create', async ctx => {});
-  router.post('/games/:name/:id/join', async ctx => {});
+  router.post('/games/:name/create', koaBody(), async ctx => {
+    // the name of the game (for example: tic-tac-toe).
+    const gameName = ctx.params.name;
+
+    // User-data to pass to the game setup function
+    const { setupData } = ctx.request.body;
+
+    // The number of players for this game instance
+    let numPlayers = parseInt(ctx.request.body.numPlayers, 10);
+    if (!numPlayers) {
+      numPlayers = 2;
+    }
+
+    // @TODO: what happens here if the gameName is not found?
+    const game = games.find(g => g.name === gameName);
+    const gameID = await CreateGame(
+      db,
+      game,
+      numPlayers,
+      setupData,
+      lobbyConfig
+    );
+
+    ctx.body = { gameID };
+  });
+
+  router.post('/games/:name/:id/join', koaBody(), async ctx => {
+    const { playerID, playerName } = ctx.request.body;
+    if (!playerID) {
+      ctx.throw(403, 'playerID is required');
+    }
+    if (!playerName) {
+      ctx.throw(403, 'playerName is required');
+    }
+    const { name: gameName, id: roomID } = ctx.params;
+    const namespacedGameID = getNamespacedGameID(roomID, gameName);
+    const gameMetadata = await db.get(GameMetadataKey(namespacedGameID));
+    if (!gameMetadata) {
+      ctx.throw(404, `Game ${roomID} not found`);
+    }
+    if (!gameMetadata.players[playerID]) {
+      ctx.throw(404, `player ${playerID} not found`);
+    }
+    if (gameMetadata.players[playerID].name) {
+      ctx.throw(409, `player ${playerID} not available`);
+    }
+
+    gameMetadata.players[playerID].name = playerName;
+    const playerCredentials = gameMetadata.players[playerID].credentials;
+
+    await db.set(GameMetadataKey(namespacedGameID), gameMetadata);
+
+    ctx.body = {
+      playerCredentials,
+    };
+  });
   router.post('/games/:name/:id/leave', async ctx => {});
   router.post('/games/:name/:id/rename', async ctx => {});
 }
