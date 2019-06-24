@@ -1,0 +1,73 @@
+A: CLIENT:
+  1. A user wants to play a multiplayer game.
+
+  2. She clics the button on the client side for an `online multiplayer game`.
+
+  3. A request is sent to the server
+    playMultiplayerGame: {
+      userId,
+      gameName,
+    }
+
+  4. A window is show to the player which says looking for an opponent
+
+@route(/games/:gameName/playMultiplayerGame)
+B. SERVER:
+  1. A request has come through for `playMultiplayerGame`.
+    request.body {gameName, userId}
+    request.params {}
+
+  2. We must have an `available players` queue sorted by the time
+    they asked for playing.
+    we search this queue to find a match based on the game name
+    and possibly the user's rank in this particular game.
+
+  3.
+    1. If we found a match, we will remove the found user from the
+      queue and return it's userId to the caller.
+    2. If we did not find a match, we will add the current user
+      to the queue and return null to the caller.
+
+  4.
+    1. If no match found, create a timeout and remove the user
+      from the queue after the provided period. and return to
+      the client with no match found message and try again if you want.
+    2. On the other hand, If a match is found. go ahead and message
+      both players (or more) that a match has been found and
+      show them a brief info about each other. and update the
+      screen to show that a game is being created for them.
+
+  5. Go ahead and create a game instance for the selected players.
+
+  6. After the game is created join both players to the game room
+    and return the result to the players
+    gameInstance {
+     gameName: string, // enum
+     gameId: string,
+     players: [{
+       userId: {
+         userId: string,
+         playerId: string, // '0' | '1' | '2' | ...
+         avatar: string,
+         level: '',
+         nickname: string,
+         credentials,
+       }
+     }],
+     isPrivate: boolean,
+     createdAt: Date,
+     url: host/games/gameName/gameId/play
+    }
+
+@route(/games/:gameName/gameId/play)
+SERVER:
+  1. A user hits this route with these info:
+    1. request.body {gameName, userId, credentials}
+    2. request.params {gameName, gameId}
+    3. request.headers.authorization
+
+  2.
+    1. First check if the game name is correct
+    2. Check if the game id is correct and find the game instance
+    3. check user credentials for the game instance
+    4. sync the user with the latest game state
