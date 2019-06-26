@@ -1,7 +1,7 @@
 A: CLIENT:
   1. A user wants to play a multiplayer game.
 
-  2. She clics the button on the client side for an `online multiplayer game`.
+  2. She clicks the button on the client side for an `online multiplayer game`.
 
   3. A request is sent to the server
     playMultiplayerGame: {

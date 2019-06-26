@@ -23,6 +23,7 @@
     "boardgame.io": "^0.31.4",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
+    "http-errors": "^1.7.3",
     "mongodb": "^3.2.7"
   },
   "devDependencies": {
