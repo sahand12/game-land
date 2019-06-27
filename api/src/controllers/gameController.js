@@ -1,5 +1,7 @@
 import axios from 'axios';
 import createError from 'http-errors';
+import User from '../models/User';
+import playerQueue from './playerQueue';
 
 const QUEUE_TIMEOUT = 60 * 1000;
 
@@ -15,26 +17,29 @@ const gameController = {
     // ]);
   },
 
-  async create(req, res, next) {
-    const {gameName} = req.body;
-    const {user} = req;
-    const oponentId = await playerQueue.get('gameName');
-    if (oponentId === null) {
-      playerQueue.add(gameName, userId);
+  async createGameByName(req, res, next) {
+    const {gameName, userId} = req.body;
+    // const {user} = req;
+
+    const found = await playerQueue.getOnePlayer('gameName');
+    if (found === null) {
+      playerQueue.addPlayer(gameName, userId);
       setTimeout(() => {
-        playerQueue.remove(gameName, userId);
+        playerQueue.removePlayer(gameName, userId);
       }, QUEUE_TIMEOUT);
     }
 
-    //
-    playerQueue.remove(gameName, userId);
-    const oponent = await User.findById(oponentId);
+    // Remove the matched opponent from the queue
+    playerQueue.remove(gameName, found.userId);
+    const opponent = await User.findById(oponentId);
 
     if (oponent == null) {
       // log the error
     }
 
   },
+
+
 };
 
 export default gameController;
