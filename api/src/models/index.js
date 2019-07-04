@@ -1,13 +1,15 @@
 import User from './User';
-import MongoAdaptor from './mongoAdapter';
+import MongoAdaptor from './adapters/MongoAdapter';
 
 function initModels(app) {
   // init db adapter
-  const mongoAdapter = new MongoAdaptor(app.dbClient, app.db);
+  const db = app.get('db');
+  const dbClient = app.get('dbClient');
+  const mongoAdapter = new MongoAdaptor(dbClient, db);
 
   //
   app.set('models', {
-    users: new User(mongoAdapter),
+    userModel: new User(mongoAdapter),
   });
 }
 

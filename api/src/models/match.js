@@ -1,5 +1,5 @@
-class Game {
-  constructor(storageApi, tableName = 'games') {
+class Match {
+  constructor(storageApi, tableName = 'matches') {
     this.db = storageApi;
     this.tableName = tableName;
   }
@@ -9,4 +9,4 @@ class Game {
   }
 }
 
-export default Game;
+export default Match;

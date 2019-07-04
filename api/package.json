@@ -9,7 +9,8 @@
     "flow:check": "flow check ./src/*",
     "watch:build": "webpack --config \"./webpack.config.js\" --watch",
     "watch:server": "nodemon --inspect=\"9229\" \"./build/bundle.js\" --watch \"./build\" ",
-    "build": "webpack"
+    "build": "webpack",
+    "api": "nodemon ./src/api.js --exec babel-node"
   },
   "dependencies": {
     "@babel/cli": "^7.4.3",
@@ -25,7 +26,8 @@
     "express": "^4.16.4",
     "http-errors": "^1.7.3",
     "mongodb": "^3.2.7",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "validator": "^11.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
