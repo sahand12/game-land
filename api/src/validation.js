@@ -1,10 +1,22 @@
-function isIrPhoneNumber(numOrStr) {
-  const input = `${numOrStr.trim()}`;
-  const re = /^d$/;
-  return
+// @todo: what if the user inserts persian/hindi numbers?
+function isIrMobNumber(numOrStr) {
+  // Get rid of any spaces, we don't need them
+  const input = `${numOrStr}`.replace(/\s/gs, '');
+
+  // Early exit
+  if (input.length > (4 + 7)) {
+    return false;
+  }
+
+  const reg = /^(0?9)(\d{2})(\d{7})$/;
+  return reg.test(input);
 }
 
-export {isIrPhoneNumber}
+function isIrHomeTelNumber(numOrStr) {
+  throw new Error('not implemented yet');
+}
+
+export {isIrMobNumber, isIrHomeTelNumber};
 
 const regex = /^([0]?[9])(\d{2})\s*(\d{7})\s*$/gm;
 const str = `0912 3017212
