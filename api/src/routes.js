@@ -44,6 +44,9 @@ router.post('/users/register/validate', usersController.validateRegistrationCode
 //      4. Interval Server Error.
 router.post('/users/register/create', usersController.createPassword);
 
+/** User Login Process ** */
+router.post('/users/login', usersController.login);
+
 
 function initRouter(app) {
   app.use('/api', router);
