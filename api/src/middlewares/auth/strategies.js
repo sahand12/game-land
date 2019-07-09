@@ -10,20 +10,24 @@ import { Strategy as LocalStrategy } from 'passport-local';
 // in this case 'username' and 'password'. If the credentials are valid, the verify
 // callback invokes 'done' to supply Passport with the user that authenticated.
 // return done(null, user)
-passport.use(
-  new LocalStrategy(async function localStrategyVerifyCallback(username, password, done) {
-    try {
-      const user = await UserModel.findOne({ username });
-      if (!user) {
-        return done(null, false, { message: 'user not found' });
-      }
-      if (!isPasswordValid(user.password, password)) {
-        return done(null, false, { message: 'invalid password' });
-      }
 
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  })
-);
+function addLocalStrategy(app) {
+  passport.use(
+    new LocalStrategy(async function localStrategyVerifyCallback(username, password, done) {
+      try {
+        const user = await UserModel.findOne({ username });
+        if (!user) {
+          return done(null, false, { message: 'user not found' });
+        }
+        if (!isPasswordValid(user.password, password)) {
+          return done(null, false, { message: 'invalid password' });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    })
+  );
+  return;
+}

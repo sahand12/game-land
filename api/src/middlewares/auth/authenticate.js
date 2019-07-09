@@ -1,8 +1,6 @@
 import passport from 'passport';
 
-function configurePassport() {
 
-}
 
 function authenticateMiddleware(req, res, next) {
   passport.authenticate('local', (err, user, info) => {

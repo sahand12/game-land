@@ -3,7 +3,7 @@ import http from 'http';
 import configureMongo from './configureMongo';
 import initRouter from './routes';
 import initModels from './models';
-import addMiddlewares from './middlewares';
+import initMiddlewares from './middlewares';
 
 const PORT = process.env.NODE_PORT || 9000;
 const DB_NAME = 'game-land-test';
@@ -13,7 +13,7 @@ async function run() {
   console.log('1. Created express app');
 
   // Add middlewares to the app
-  addMiddlewares(app);
+  initMiddlewares(app);
   console.log('2. Added middlewares');
 
   // Add routes

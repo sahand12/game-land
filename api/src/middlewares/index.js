@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import initPassport from 'auth/index';
 
 // Configure these middlewares
 // 1. cookie parser
@@ -12,9 +13,11 @@ import bodyParser from 'body-parser';
 // 9. session handling
 //
 
-function addMiddleware(app) {
+function initMiddlewares(app) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  initPassport(app);
 }
 
-export default addMiddleware;
+export default initMiddlewares;
