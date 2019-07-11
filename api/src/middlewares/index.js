@@ -14,10 +14,25 @@ import initPassport from 'auth/index';
 //
 
 function initMiddlewares(app) {
+  app.disable('x-powered-by');
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
   initPassport(app);
+
+
+  /**
+   * Error Handler
+   */
+  if (process.env.NODE_ENV === 'development') {
+    app.use(errorHandler());
+  }
+  else {
+    app.use((err, req, res, next) => {
+      console.error(err);
+      return res.status(500).send('Server Error');
+    });
+  }
 }
 
 export default initMiddlewares;

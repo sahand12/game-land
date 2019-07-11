@@ -1,6 +1,16 @@
-// import isEmail from 'validator/lib/isEmail';
+import passport from 'passport';
+import crypto from 'crypto';
 
-class UsersController {
+const userController = {};
+
+/**
+ * POST /login
+ * Login
+ */
+userController.postLogin = async function postLogin(req, res, next) {
+  const validationErrors = [];
+};
+class empty {
   async getAllUsers(req, res, next) {
     const { userModel } = req.app.get('models');
     try {
@@ -30,5 +40,4 @@ class UsersController {
   }
 }
 
-const usersController = new UsersController();
-export default usersController;
+export default userController;

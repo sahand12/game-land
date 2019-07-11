@@ -7,7 +7,6 @@ import {
 
 const router = Router();
 
-// router.get('/games/list', gamesController.getGameNames);
 
 router.route('/users')
   .get(usersController.getAllUsers)
