@@ -32,3 +32,5 @@ module.exports = {
 };
 
 // { settings: { flowtype: { onlyFilesWithFlowAnnotation: true } } }
+
+//@TODO: add eslint-plugin-node and eslint-plugin-security to /api folder using hierarchical config files
