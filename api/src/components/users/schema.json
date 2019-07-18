@@ -1,0 +1,37 @@
+{
+  "$schema": "",
+  "$id": "",
+  "title": "",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "mob": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "passwordResetToken": {
+      "type": "string"
+    },
+    "passwordResetExpires": {
+      "type": "number"
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "avatarId": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "avatarId"]
+    }
+  },
+  "required": ["mob", "password"]
+}

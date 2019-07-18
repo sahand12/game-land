@@ -1,5 +1,5 @@
 // @todo: what if the user inserts persian/hindi numbers?
-function isIrMobNumber(numOrStr) {
+function isIRMobNumber(numOrStr) {
   // Get rid of any spaces, we don't need them
   const input = `${numOrStr}`.replace(/\s/gs, '');
 
@@ -25,4 +25,4 @@ function isIrHomeTelNumber(numOrStr) {
   return reg.test(input);
 }
 
-export {isIrMobNumber, isIrHomeTelNumber};
+export {isIRMobNumber, isIrHomeTelNumber};
